@@ -1,20 +1,22 @@
 <template>
   <div class="hex-tile" :class="type">
-    <span v-if="number !== null" class="tile-number">{{ number }}</span>
+    <div class="center">
+      <input type="text" v-model="number" class="number-input" />
+      <select v-model="type" class="select-input">
+        <option value="wood">Wood</option>
+        <option value="brick">Brick</option>
+        <option value="sheep">Sheep</option>
+        <option value="desert">Desert</option>
+        <option value="wheat">Wheat</option>
+        <option value="ore">Ore</option>
+      </select>
+    </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
-  type: {
-    type: String,
-    required: true,
-  },
-  number: {
-    type: [Number, null],
-    default: null,
-  },
-})
+const number = defineModel('number')
+const type = defineModel('type')
 </script>
 
 <style scoped>
@@ -72,5 +74,22 @@ defineProps({
 
 .ore {
   background: #b0c4de;
+}
+
+.number-input {
+  width: 50%;
+  font-size: 12px;
+  padding: 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 </style>
