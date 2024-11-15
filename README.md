@@ -1,7 +1,5 @@
 # catan-spotter
 
-# Settlers of Catan - Optimal Starting Positions Finder
-
 ## Project Overview
 
 This project aims to find the best starting positions for the game *Settlers of Catan*. It is currently under development and will include several features to help players configure and analyze their optimal strategies in the game. 
@@ -14,4 +12,8 @@ This project aims to find the best starting positions for the game *Settlers of 
 - **Built Settlements** (Planned Feature): Future versions will allow users to input built settlements (from themselves and other players), which will be considered in the optimal position calculation.
 
 ### How It Works:
-The tool calculates optimal starting positions using a mathematical model that takes into account the board configuration, resource importance, harbor significance, and other relevant factors determined by the user. Based on these inputs, it suggests the best starting positions for the player.
+The tool calculates optimal starting positions using a mathematical model that takes into account the board configuration, resource importance, harbor significance, and other relevant factors determined by the user. The model is designed to be aware of the game's rules, ensuring that:
+- The user cannot input invalid configurations, such as incorrect resource distribution or improper number assignments.
+- The model only generates valid and rule-conforming positions for settlements on the board, avoiding illegal placements.
+
+Based on these inputs and rules, the tool suggests the best starting positions for the player.
