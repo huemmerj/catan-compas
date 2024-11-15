@@ -1,7 +1,7 @@
 <template>
   <div class="hex-tile" :class="type">
     <div class="center">
-      <input type="text" v-model="number" class="number-input" />
+      <input type="number" v-model="number" class="number-input" />
       <select v-model="type" class="select-input">
         <option value="wood">Wood</option>
         <option value="brick">Brick</option>
