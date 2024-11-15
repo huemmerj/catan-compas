@@ -1,0 +1,10 @@
+services:
+  app:
+    container_name: catan-spotter-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 9999:9999
+    env_file:
+      - .env
