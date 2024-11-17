@@ -95,13 +95,7 @@ def solve_optimal_position(hex_data: dict[list[int, str]]):
         print("Optimal solution found")
         for k in corners:
             if y[k].x > 0.5:
-                solution.append(
-                    f"Startplatz: {k} mit angrenzenden Hexfeldern: {corners[k]}"
-                )
-                for hex in corners[k]:
-                    solution.append(
-                        f"Number: {hex_numbers[hex]} Resource: {hex_resources[hex]}"
-                    )
+                solution.append(k)
         return (True, solution)
 
     else:
