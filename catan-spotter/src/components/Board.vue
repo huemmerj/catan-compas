@@ -1,8 +1,23 @@
 <template>
   <div>
     <div class="board">
-      <div v-for="(row, rowIndex) in structuredTiles" :key="rowIndex" class="row">
-        <div v-for="(tile, tileIndex) in row" :key="tileIndex" class="tile-wrapper">
+      <!-- Render rows with settlements and hexes -->
+      <div v-for="(row, rowIndex) in structuredTilesWithSettlements" :key="rowIndex" class="row">
+        <div v-if="row.type === 'settlement'" class="settlement-row">
+          <div
+            v-for="(settlement, settlementIndex) in row.tiles"
+            :key="settlementIndex"
+            class="settlement-wrapper"
+          >
+            <div class="settlement-placeholder"></div>
+          </div>
+        </div>
+        <div
+          v-else-if="row.type"
+          v-for="(tile, tileIndex) in row.tiles"
+          :key="tileIndex"
+          class="tile-wrapper"
+        >
           <Tile v-model:type="tile.type" v-model:number.number="tile.number" />
         </div>
       </div>
@@ -47,6 +62,31 @@ let tileIndex = 0
 for (const rowLength of rowPattern) {
   structuredTiles.push(tiles.slice(tileIndex, tileIndex + rowLength))
   tileIndex += rowLength
+}
+
+// Create a new array that includes settlement rows between hex rows
+const structuredTilesWithSettlements = []
+
+for (let i = 0; i < structuredTiles.length; i++) {
+  // Add settlement row before the current hex row
+  if (i === 0) {
+    structuredTilesWithSettlements.push({
+      type: 'settlement',
+      tiles: Array(rowPattern[i] + 1).fill(null),
+    })
+  }
+
+  // Add the actual hex row
+  structuredTilesWithSettlements.push({
+    type: 'hex',
+    tiles: structuredTiles[i],
+  })
+
+  // Add settlement row after the current hex row
+  structuredTilesWithSettlements.push({
+    type: 'settlement',
+    tiles: Array(rowPattern[i] + 1).fill(null),
+  })
 }
 
 const getStartPositions = async () => {
@@ -99,7 +139,35 @@ const getStartPositions = async () => {
   gap: 0.1em;
 }
 
+.hex-row {
+  margin-bottom: -1.4em;
+}
+
 .tile-wrapper {
   margin-bottom: -1.4em;
+}
+
+.settlement-row {
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  margin-bottom: -1em;
+}
+
+.settlement-wrapper {
+  width: 1.5em;
+  height: 1.5em;
+  background-color: #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settlement-placeholder {
+  width: 1em;
+  height: 1em;
+  background-color: #bbb;
+  border-radius: 50%;
 }
 </style>
